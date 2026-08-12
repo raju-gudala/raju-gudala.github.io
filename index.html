@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raju Gudala | Hardware Engineer — UAV Avionics &amp; Power Electronics</title>
+<meta name="description" content="Raju Gudala — Hardware Engineer specializing in UAV flight controller design, power electronics and multilayer PCB layout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F2;
+    --bg-panel:#F1EEE2;
+    --bg-panel-2:#E8E2CE;
+    --copper:#B5651D;
+    --copper-dim:#8C5636;
+    --gold:#A8791E;
+    --signal:#1E8F63;
+    --silk:#1B241E;
+    --muted:#57685D;
+    --muted-dim:#8A9A8F;
+    --line:rgba(27,36,30,0.12);
+    --line-strong:rgba(27,36,30,0.24);
+    --radius:2px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --font-body:'IBM Plex Sans', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+  body{
+    background:var(--bg);
+    color:var(--silk);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    opacity:0.6;
+    pointer-events:none;
+    z-index:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+  ::selection{background:var(--copper); color:var(--bg);}
+  :focus-visible{outline:2px solid var(--signal); outline-offset:3px;}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--copper);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:16px; height:1px; background:var(--copper);}
+
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em;}
+  .section-title{font-size:clamp(28px,4vw,40px); color:var(--silk); margin:14px 0 8px;}
+  .section-sub{color:var(--muted); max-width:520px; font-size:15px;}
+  section{position:relative; z-index:1; padding:110px 0;}
+  .section-head{margin-bottom:56px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(250,248,242,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .logo{
+    font-family:var(--font-mono); font-weight:700; font-size:15px; letter-spacing:0.04em;
+    color:var(--silk); display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:7px; height:7px; background:var(--signal); border-radius:50%; box-shadow:0 0 8px var(--signal);}
+  .navlinks{display:flex; gap:30px; list-style:none;}
+  .navlinks a{
+    font-family:var(--font-mono); font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--muted); transition:color 0.2s;
+    position:relative; padding-bottom:3px;
+  }
+  .navlinks a::after{content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--copper); transition:width 0.25s;}
+  .navlinks a:hover{color:var(--silk);}
+  .navlinks a:hover::after{width:100%;}
+  .nav-cta{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--bg); background:var(--gold); padding:9px 16px; border-radius:var(--radius);
+    transition:background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover{background:var(--signal); color:var(--bg); transform:translateY(-1px);}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+  .burger span{width:22px; height:2px; background:var(--silk);}
+  .mobile-menu{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:170px; padding-bottom:90px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  .hero-title{font-size:clamp(40px,6vw,68px); line-height:1.02; margin:18px 0 20px; color:var(--silk);}
+  .hero-title .accent{color:var(--copper);}
+  .hero-role{
+    font-family:var(--font-mono); font-size:15px; color:var(--signal); margin-bottom:22px; letter-spacing:0.02em;
+  }
+  .hero-desc{color:var(--muted); max-width:480px; font-size:16px; margin-bottom:36px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+    padding:13px 22px; border-radius:var(--radius); display:inline-flex; align-items:center; gap:8px;
+    transition:all 0.2s;
+    border:1px solid var(--line-strong);
+  }
+  .btn-primary{background:var(--copper); color:var(--bg); border-color:var(--copper);}
+  .btn-primary:hover{background:var(--gold); border-color:var(--gold); transform:translateY(-1px);}
+  .btn-ghost{color:var(--silk);}
+  .btn-ghost:hover{border-color:var(--signal); color:var(--signal);}
+  .hero-meta{
+    display:flex; gap:28px; font-family:var(--font-mono); font-size:12px; color:var(--muted-dim);
+    border-top:1px solid var(--line); padding-top:18px; flex-wrap:wrap;
+  }
+  .hero-meta strong{color:var(--muted); display:block; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; font-weight:500;}
+
+  /* PCB stack-up visual */
+  .stack-wrap{position:relative;}
+  .stack-caption{font-family:var(--font-mono); font-size:11px; color:var(--muted-dim); letter-spacing:0.08em; text-transform:uppercase; margin-top:14px; text-align:center;}
+  .layer-band{cursor:default; transition:opacity 0.2s;}
+  .layer-band rect{transition:filter 0.2s;}
+  .layer-band:hover rect{filter:brightness(1.25);}
+  .layer-label{font-family:'JetBrains Mono'; font-size:9.5px; letter-spacing:0.06em;}
+  .layer-band:hover .layer-label{fill:var(--signal) !important;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:start;}
+  .about-text p{color:var(--muted); font-size:16px; margin-bottom:16px; max-width:540px;}
+  .about-text strong{color:var(--silk); font-weight:600;}
+  .specs-table{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .specs-row{display:flex; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:12.5px;}
+  .specs-row:last-child{border-bottom:none;}
+  .specs-row:nth-child(odd){background:var(--bg-panel);}
+  .specs-key{color:var(--muted-dim); letter-spacing:0.05em; text-transform:uppercase;}
+  .specs-val{color:var(--silk); text-align:right;}
+
+  /* ---------- EXPERIENCE (revision log) ---------- */
+  .rev-log{position:relative; padding-left:36px; border-left:1px solid var(--line-strong);}
+  .rev-item{position:relative; margin-bottom:52px;}
+  .rev-item:last-child{margin-bottom:0;}
+  .rev-item::before{
+    content:''; position:absolute; left:-41px; top:4px; width:9px; height:9px;
+    background:var(--bg); border:2px solid var(--copper); border-radius:50%;
+  }
+  .rev-tag{font-family:var(--font-mono); font-size:11.5px; color:var(--copper); letter-spacing:0.08em; margin-bottom:8px; display:block;}
+  .rev-item h3{font-size:20px; color:var(--silk); margin-bottom:6px;}
+  .rev-period{font-family:var(--font-mono); font-size:11.5px; color:var(--muted-dim); margin-bottom:14px; display:block;}
+  .rev-item p{color:var(--muted); font-size:14.5px; margin-bottom:8px; max-width:640px;}
+  .rev-item p::before{content:'▸ '; color:var(--copper-dim);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .chip{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.03em; color:var(--muted);
+    border:1px solid var(--line-strong); padding:5px 11px; border-radius:var(--radius);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .proj-card{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:26px 24px; display:flex; flex-direction:column; transition:border-color 0.25s, transform 0.25s;
+  }
+  .proj-card:hover{border-color:var(--copper); transform:translateY(-4px);}
+  .desig{
+    font-family:var(--font-mono); font-size:13px; color:var(--signal); background:rgba(30,143,99,0.08);
+    border:1px solid rgba(30,143,99,0.3); width:fit-content; padding:3px 9px; border-radius:var(--radius); margin-bottom:16px;
+  }
+  .proj-card h3{font-size:17px; color:var(--silk); margin-bottom:10px; line-height:1.3;}
+  .proj-card p{color:var(--muted); font-size:13.5px; margin-bottom:16px; flex-grow:1;}
+  .proj-specs{border-top:1px solid var(--line); padding-top:14px; margin-bottom:14px;}
+  .proj-specs .row{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; margin-bottom:6px;}
+  .proj-specs .row:last-child{margin-bottom:0;}
+  .proj-specs .k{color:var(--muted-dim); text-transform:uppercase; letter-spacing:0.04em;}
+  .proj-specs .v{color:var(--muted);}
+
+  /* ---------- SKILLS (BOM) ---------- */
+  .bom{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .bom-head{
+    display:grid; grid-template-columns:70px 1fr 2.3fr; background:var(--bg-panel-2);
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted-dim);
+    padding:12px 20px; border-bottom:1px solid var(--line);
+  }
+  .bom-row{
+    display:grid; grid-template-columns:70px 1fr 2.3fr; padding:16px 20px; border-bottom:1px solid var(--line);
+    align-items:center; font-size:13.5px;
+  }
+  .bom-row:last-child{border-bottom:none;}
+  .bom-row:nth-child(even){background:rgba(237,234,224,0.02);}
+  .bom-ref{font-family:var(--font-mono); color:var(--copper); font-size:12.5px;}
+  .bom-cat{color:var(--silk); font-weight:500; font-family:var(--font-mono); font-size:12.5px;}
+  .bom-items{color:var(--muted); font-size:13px;}
+
+  /* ---------- CERTS + EDU ---------- */
+  .cert-edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  .cert-list{list-style:none;}
+  .cert-item{
+    display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); font-size:14px; color:var(--muted);
+  }
+  .cert-item:last-child{border-bottom:none;}
+  .cert-item .badge{
+    font-family:var(--font-mono); font-size:10.5px; color:var(--gold); border:1px solid rgba(217,179,107,0.35);
+    padding:2px 8px; border-radius:var(--radius); height:fit-content; white-space:nowrap;
+  }
+  .cert-item strong{color:var(--silk); display:block; margin-bottom:2px; font-weight:500; font-size:14px;}
+  .edu-item{margin-bottom:28px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item h3{font-size:16px; color:var(--silk); margin-bottom:4px;}
+  .edu-item span{font-family:var(--font-mono); font-size:12px; color:var(--muted-dim); display:block; margin-bottom:6px;}
+  .edu-item p{color:var(--muted); font-size:13.5px;}
+
+  /* ---------- CONTACT (connector pinout) ---------- */
+  .contact-section{padding-bottom:70px;}
+  .pinout{
+    display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line-strong); border-radius:var(--radius); overflow:hidden;
+  }
+  .pin{
+    padding:30px 18px; text-align:center; border-right:1px solid var(--line); transition:background 0.2s;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .pin:last-child{border-right:none;}
+  .pin:hover{background:var(--bg-panel);}
+  .pin-num{font-family:var(--font-mono); font-size:10px; color:var(--muted-dim);}
+  .pin-dot{width:10px; height:10px; border-radius:50%; background:var(--copper); box-shadow:0 0 10px rgba(181,101,29,0.35);}
+  .pin-label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);}
+  .pin-value{font-size:12.5px; color:var(--silk); word-break:break-word;}
+  .contact-cta{text-align:center; margin-top:56px;}
+  .contact-cta h2{font-size:clamp(26px,4vw,38px); margin-bottom:14px;}
+  .contact-cta p{color:var(--muted); max-width:420px; margin:0 auto 28px;}
+
+  footer{border-top:1px solid var(--line); padding:32px 0; text-align:center;}
+  footer p{font-family:var(--font-mono); font-size:11.5px; color:var(--muted-dim); letter-spacing:0.03em;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:44px;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .proj-grid{grid-template-columns:1fr 1fr;}
+    .cert-edu-grid{grid-template-columns:1fr; gap:44px;}
+    .pinout{grid-template-columns:repeat(3,1fr);}
+    .pin{border-bottom:1px solid var(--line);}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+    .navlinks, .nav-cta{display:none;}
+    .burger{display:flex;}
+    .mobile-menu.open{
+      display:flex; flex-direction:column; position:fixed; top:64px; left:0; right:0; background:var(--bg);
+      border-bottom:1px solid var(--line); padding:12px 20px 24px; gap:4px; z-index:49;
+    }
+    .mobile-menu a{
+      font-family:var(--font-mono); font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted);
+      padding:12px 0; border-bottom:1px solid var(--line);
+    }
+    section{padding:70px 0;}
+    .hero{padding-top:130px;}
+    .proj-grid{grid-template-columns:1fr;}
+    .bom-head{display:none;}
+    .bom-row{grid-template-columns:1fr; gap:6px; padding:16px 18px;}
+    .pinout{grid-template-columns:repeat(2,1fr);}
+    .specs-row{flex-direction:column; gap:4px;}
+    .specs-val{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#home" class="logo"><span class="dot"></span>RG.</a>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact</a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">REV A · HYDERABAD, IN</div>
+      <h1 class="hero-title">Raju<br>Gudala<span class="accent">.</span></h1>
+      <div class="hero-role">Hardware Engineer — UAV Avionics &amp; Power Electronics</div>
+      <p class="hero-desc">I design flight controllers and power systems that keep drones in the air — from schematic capture through 6-layer PCB layout, bring-up, and first flight.</p>
+      <div class="hero-ctas">
+        <a href="Raju_Gudala_Resume.pdf" class="btn btn-primary" target="_blank" rel="noopener">View Resume ↗</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Experience</strong>1.5+ yrs, hardware R&amp;D</div>
+        <div><strong>Tools</strong>KiCad · Altium · LTspice</div>
+        <div><strong>Focus</strong>Flight controllers · Power electronics</div>
+      </div>
+    </div>
+
+    <div class="stack-wrap">
+      <svg viewBox="0 0 360 400" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six layer PCB stack-up diagram">
+        <!-- layer bands: silk, L1 copper, prepreg, L2 gnd, core, L3 pwr, prepreg, L4 sig, silk bottom -->
+        <g class="layer-band">
+          <rect x="60" y="20" width="200" height="18" fill="#EFE9D6" stroke="var(--line-strong)"/>
+          <text x="270" y="33" class="layer-label" fill="var(--silk)">TOP SILK</text>
+          <text x="160" y="33" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--silk)" letter-spacing="1">RAJU GUDALA</text>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="42" width="200" height="26" fill="var(--copper)"/>
+          <text x="270" y="59" class="layer-label" fill="var(--copper)">L1 · SIGNAL</text>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="72" width="200" height="14" fill="#DFD2AC" stroke="var(--line)"/>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="90" width="200" height="26" fill="#AEB9AF"/>
+          <text x="270" y="107" class="layer-label" fill="var(--muted)">L2 · GND PLANE</text>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="120" width="200" height="18" fill="#DFD2AC" stroke="var(--line)"/>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="142" width="200" height="26" fill="var(--gold)"/>
+          <text x="270" y="159" class="layer-label" fill="var(--gold)">L3 · PWR PLANE</text>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="172" width="200" height="14" fill="#DFD2AC" stroke="var(--line)"/>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="190" width="200" height="26" fill="var(--copper-dim)"/>
+          <text x="270" y="207" class="layer-label" fill="var(--copper-dim)">L4 · SIGNAL</text>
+        </g>
+        <g class="layer-band">
+          <rect x="60" y="220" width="200" height="18" fill="#EFE9D6" stroke="var(--line-strong)"/>
+          <text x="270" y="233" class="layer-label" fill="var(--muted)">BOTTOM SILK</text>
+        </g>
+        <!-- via -->
+        <circle cx="110" cy="129" r="4" fill="none" stroke="var(--signal)" stroke-width="1.5"/>
+        <line x1="110" y1="20" x2="110" y2="238" stroke="var(--signal)" stroke-width="1" stroke-dasharray="2 3" opacity="0.5"/>
+        <text x="90" y="260" font-family="JetBrains Mono" font-size="9" fill="var(--muted-dim)">VIA · PLATED THROUGH-HOLE</text>
+
+        <!-- baseplate label -->
+        <line x1="60" y1="280" x2="260" y2="280" stroke="var(--line)"/>
+        <text x="60" y="300" font-family="JetBrains Mono" font-size="9" fill="var(--muted-dim)">STACK-UP: 6L / 1.6mm / ENIG</text>
+        <text x="60" y="316" font-family="JetBrains Mono" font-size="9" fill="var(--muted-dim)">REF: TI-CIRCLE V1 · STM32F427</text>
+      </svg>
+      <div class="stack-caption">6-layer flight controller stack-up · hover a layer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid reveal">
+    <div class="about-text">
+      <div class="eyebrow">About</div>
+      <h2 class="section-title">Full-cycle hardware, board by board.</h2>
+      <p>I'm a hardware engineer working across the full lifecycle of electronics development — <strong>schematic capture, component selection, multilayer PCB layout, simulation, bring-up and validation.</strong> Most of my time lives inside KiCad and Altium, moving between microcontroller breakout boards and complex, high-voltage power electronics.</p>
+      <p>Over the past 1.5 years at TiHAN-IIT Hyderabad, I've taken UAV flight controllers and power systems from a blank schematic sheet to soldered, flight-tested hardware — including a custom ArduPilot-compatible flight controller built around the STM32F427, and a tethered drone power system pushing 2.4kW across a 360V DC link.</p>
+      <p>I'm comfortable moving fast across unfamiliar domains, with a solid base in communication protocols, embedded firmware integration, and design-for-manufacturing practices.</p>
+    </div>
+    <div class="specs-table">
+      <div class="specs-row"><span class="specs-key">Role</span><span class="specs-val">Hardware Engineer</span></div>
+      <div class="specs-row"><span class="specs-key">Experience</span><span class="specs-val">1.5+ years</span></div>
+      <div class="specs-row"><span class="specs-key">Base</span><span class="specs-val">Hyderabad, India</span></div>
+      <div class="specs-row"><span class="specs-key">PCB Tools</span><span class="specs-val">KiCad, Altium, EasyEDA</span></div>
+      <div class="specs-row"><span class="specs-key">Simulation</span><span class="specs-val">LTspice, PSpice</span></div>
+      <div class="specs-row"><span class="specs-key">Firmware</span><span class="specs-val">C, Embedded C</span></div>
+      <div class="specs-row"><span class="specs-key">Education</span><span class="specs-val">B.Tech ECE, CGPA 8.05</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Experience</div>
+      <h2 class="section-title">Revision log</h2>
+      <p class="section-sub">TiHAN-IIT Hyderabad, R&amp;D Intern — May 2025 to Apr 2026. Each build below shipped as real hardware.</p>
+    </div>
+
+    <div class="rev-log reveal">
+      <div class="rev-item">
+        <span class="rev-tag">REV 1.0</span>
+        <h3>UAV Flight Controller — Ti-Circle v1</h3>
+        <span class="rev-period">6-layer PCB · 250+ components · STM32F427</span>
+        <p>Designed a custom UAV flight controller from scratch supporting ArduPilot firmware, built around the STM32F427 as primary flight MCU.</p>
+        <p>Integrated an STM32F103CBT6 as a dedicated I/O co-processor for PWM generation and peripheral management, with IMU sensors over SPI/I2C and telemetry/GPS over UART.</p>
+        <p>Designed the onboard power supply with multiple LDO and switching regulator stages for clean, regulated rails to every flight-critical peripheral.</p>
+        <div class="chip-row"><span class="chip">STM32F427</span><span class="chip">ArduPilot</span><span class="chip">6-Layer PCB</span><span class="chip">SPI/I2C/UART</span></div>
+      </div>
+
+      <div class="rev-item">
+        <span class="rev-tag">REV 1.1</span>
+        <h3>5V Power Module for UAV Avionics</h3>
+        <span class="rev-period">LT8645SHV-2 · 3S–12S LiPo input</span>
+        <p>Designed a high-efficiency, wide-input 5V DC-DC power module supporting 3S–12S LiPo battery input using the LT8645SHV-2 synchronous buck converter.</p>
+        <p>Built in reverse-polarity protection, UVLO, soft-start and power-good monitoring for reliable delivery to flight-critical avionics.</p>
+        <p>Optimized the PCB layout for low EMI, low output ripple and improved thermal performance, stabilizing power to flight controllers, GPS, telemetry and sensors.</p>
+        <div class="chip-row"><span class="chip">LT8645SHV-2</span><span class="chip">LTspice</span><span class="chip">Low-EMI Layout</span></div>
+      </div>
+
+      <div class="rev-item">
+        <span class="rev-tag">REV 1.2</span>
+        <h3>Carrier Board — Cube Orange+ Flight Controller</h3>
+        <span class="rev-period">Flight-tested on drone platform</span>
+        <p>Designed a custom carrier board for the Cube Orange+ module, interfaced via board-to-board connectors for full autopilot peripheral integration.</p>
+        <p>Ran an EMI/EMC-aware layout with controlled impedance routing, ground plane management and signal isolation between high-current and sensitive paths.</p>
+        <p>Owned the complete flow — schematic, layout, DFM review, Gerber generation — then debugged and validated the fabricated board through bench and flight testing.</p>
+        <div class="chip-row"><span class="chip">Cube Orange+</span><span class="chip">EMI/EMC Layout</span><span class="chip">Flight-Tested</span></div>
+      </div>
+
+      <div class="rev-item">
+        <span class="rev-tag">REV 1.3</span>
+        <h3>Tethered Drone Power System</h3>
+        <span class="rev-period">230V AC → 360V DC @ 8A → 24V DC @ 100A (2.4kW)</span>
+        <p>Engineered end-to-end power delivery for a tethered platform: an AC-DC base station converting 230V AC to 360V DC @ 8A, and an isolated air-unit converter stepping that down to 24V DC @ 100A for avionics.</p>
+        <p>Added voltage/current monitoring on the ground unit for real-time telemetry, plus automatic arbitration for seamless failover between tether power and an onboard backup battery.</p>
+        <p>Used TDK power modules for the high-reliability power stage, validated with custom SPICE models, and ran schematic capture and PCB design in EasyEDA.</p>
+        <div class="chip-row"><span class="chip">2.4kW</span><span class="chip">EasyEDA</span><span class="chip">Failover Arbitration</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Projects</div>
+      <h2 class="section-title">Academic builds</h2>
+      <p class="section-sub">Independent projects, each carried through schematic, simulation and hardware.</p>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <span class="desig">U1</span>
+        <h3>Adjustable DC-DC Step-Down Converter</h3>
+        <p>Wide-input buck converter using the LM2596S-ADJ, with a feedback potentiometer for adjustable output and a UVLO delay circuit for stable start-up.</p>
+        <div class="proj-specs">
+          <div class="row"><span class="k">Input</span><span class="v">5–40V</span></div>
+          <div class="row"><span class="k">Output</span><span class="v">3.3–15V, 3A</span></div>
+          <div class="row"><span class="k">Tools</span><span class="v">KiCad, LTspice</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <span class="desig">U2</span>
+        <h3>Digital Clock — 8051</h3>
+        <p>Real-time clock on the 8051 interfaced with a DS1307 RTC, with a bare-metal I2C driver written from scratch for register-level communication.</p>
+        <div class="proj-specs">
+          <div class="row"><span class="k">MCU</span><span class="v">8051</span></div>
+          <div class="row"><span class="k">Display</span><span class="v">16x2 LCD</span></div>
+          <div class="row"><span class="k">Tools</span><span class="v">Keil, Proteus</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <span class="desig">U3</span>
+        <h3>AgriSense — Agricultural Bot</h3>
+        <p>Autonomous smart-farm bot on Arduino UNO for soil moisture monitoring, automated precision irrigation, and threshold-based weed detection.</p>
+        <div class="proj-specs">
+          <div class="row"><span class="k">Platform</span><span class="v">Arduino UNO</span></div>
+          <div class="row"><span class="k">Sensors</span><span class="v">Soil moisture</span></div>
+          <div class="row"><span class="k">Domain</span><span class="v">IoT / AgriTech</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Skills</div>
+      <h2 class="section-title">Bill of materials</h2>
+      <p class="section-sub">The tools, languages and protocols that go into every build.</p>
+    </div>
+    <div class="bom reveal">
+      <div class="bom-head"><span>Ref</span><span>Category</span><span>Items</span></div>
+      <div class="bom-row"><span class="bom-ref">C1</span><span class="bom-cat">PCB Design</span><span class="bom-items">KiCad, Altium Designer, EasyEDA, LTspice, PSpice</span></div>
+      <div class="bom-row"><span class="bom-ref">C2</span><span class="bom-cat">Programming</span><span class="bom-items">C, Embedded C</span></div>
+      <div class="bom-row"><span class="bom-ref">C3</span><span class="bom-cat">Dev Tools</span><span class="bom-items">STM32CubeIDE, Arduino IDE, Keil µVision, NI Multisim, Proteus</span></div>
+      <div class="bom-row"><span class="bom-ref">C4</span><span class="bom-cat">Microcontrollers</span><span class="bom-items">STM32 (F1/F4), ESP32, Arduino UNO, 8051, PIC, Raspberry Pi, 8086</span></div>
+      <div class="bom-row"><span class="bom-ref">C5</span><span class="bom-cat">Protocols</span><span class="bom-items">UART, SPI, I2C, CAN, USB, Wi-Fi</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTS + EDUCATION ================= -->
+<section id="education">
+  <div class="wrap cert-edu-grid">
+    <div class="reveal">
+      <div class="eyebrow">Certifications</div>
+      <h2 class="section-title" style="font-size:26px;">NPTEL / SWAYAM</h2>
+      <ul class="cert-list">
+        <li class="cert-item">
+          <div>
+            <strong>Introduction to Industry 4.0 and Industrial IoT</strong>
+            NPTEL Online Certification, SWAYAM MHRD
+          </div>
+          <span class="badge">79%</span>
+        </li>
+        <li class="cert-item">
+          <div>
+            <strong>ESD: Hands-On Circuits and PCB Design with CAD Software</strong>
+            NPTEL Online Certification, SWAYAM MHRD
+          </div>
+          <span class="badge">78%</span>
+        </li>
+        <li class="cert-item">
+          <div>
+            <strong>VLSI Design Flow: RTL to GDS</strong>
+            NPTEL Online Certification, SWAYAM MHRD
+          </div>
+          <span class="badge">80%</span>
+        </li>
+        <li class="cert-item">
+          <div>
+            <strong>Introduction to Embedded Systems</strong>
+            NPTEL Online Certification, SWAYAM MHRD
+          </div>
+          <span class="badge">49%</span>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Education</div>
+      <h2 class="section-title" style="font-size:26px;">Academic background</h2>
+      <div class="edu-item">
+        <h3>B.Tech — Electronics &amp; Communication Engineering</h3>
+        <span>Rajiv Gandhi University of Knowledge Technologies, Nuzvid · 2021–2025</span>
+        <p>CGPA: 8.05 / 10</p>
+      </div>
+      <div class="edu-item">
+        <h3>Pre-University Course (PUC)</h3>
+        <span>Rajiv Gandhi University of Knowledge Technologies, Nuzvid · 2019–2021</span>
+        <p>CGPA: 8.81 / 10</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center; margin:0 auto 48px;">
+      <div class="eyebrow" style="justify-content:center;">Contact</div>
+      <h2 class="section-title">Pinout</h2>
+      <p class="section-sub" style="margin:0 auto;">Open to full-time hardware roles and freelance PCB / embedded work.</p>
+    </div>
+
+    <div class="pinout reveal">
+      <a href="mailto:rajugudala730@gmail.com" class="pin">
+        <span class="pin-num">P1</span>
+        <span class="pin-dot"></span>
+        <span class="pin-label">Email</span>
+        <span class="pin-value">rajugudala730@gmail.com</span>
+      </a>
+      <a href="tel:+919492934882" class="pin">
+        <span class="pin-num">P2</span>
+        <span class="pin-dot"></span>
+        <span class="pin-label">Phone</span>
+        <span class="pin-value">+91 94929 34882</span>
+      </a>
+      <a href="https://github.com/raju-gudala" target="_blank" rel="noopener" class="pin">
+        <span class="pin-num">P3</span>
+        <span class="pin-dot"></span>
+        <span class="pin-label">GitHub</span>
+        <span class="pin-value">raju-gudala</span>
+      </a>
+      <a href="https://www.linkedin.com/in/raju-gudala" target="_blank" rel="noopener" class="pin">
+        <span class="pin-num">P4</span>
+        <span class="pin-dot"></span>
+        <span class="pin-label">LinkedIn</span>
+        <span class="pin-value">raju-gudala</span>
+      </a>
+      <span class="pin">
+        <span class="pin-num">P5</span>
+        <span class="pin-dot"></span>
+        <span class="pin-label">Location</span>
+        <span class="pin-value">Hyderabad, IN</span>
+      </span>
+    </div>
+
+    <div class="contact-cta reveal">
+      <a href="mailto:rajugudala730@gmail.com" class="btn btn-primary">Email Me →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 RAJU GUDALA · HARDWARE ENGINEER · DESIGNED &amp; ROUTED IN HYDERABAD</p>
+</footer>
+
+<script>
+  // mobile menu toggle
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

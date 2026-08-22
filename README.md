@@ -1,114 +1,72 @@
-# Hi, I'm Raju Gudala 👋
+<div align="center">
 
-**Embedded Hardware Design Engineer | Schematic → PCB → Bring-Up**
+# Raju Gudala | Embedded Hardware Design Engineer
 
-I design embedded hardware end-to-end — schematic capture, multilayer PCB layout, power electronics, and firmware bring-up. My deepest project work has been in UAV flight controllers and power systems, and I'm continuously broadening into industrial and general-purpose embedded design.
+**Schematic capture · Multilayer PCB layout · Power electronics · Firmware bring-up**
 
-📍 Hyderabad, India
-📫 rajugudala730@gmail.com
-💼 LinkedIn: https://linkedin.com/in/raju-gudala
-🌐 Portfolio: https://raju-gudala.github.io
+[![Live Site](https://img.shields.io/badge/Live-raju--gudala.github.io-1B5FA8?style=for-the-badge)](https://raju-gudala.github.io/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-raju--gudala-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raju-gudala)
+[![Email](https://img.shields.io/badge/Email-rajugudala730%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rajugudala730@gmail.com)
 
----
-
-## About Me
-
-- 🔭 Working on embedded hardware for UAV avionics and power electronics at TiHAN-IIT Hyderabad
-- 🌱 Deepening my knowledge of EMI/EMC-aware layout, high-voltage power design, and design-for-manufacturing
-- ⚙️ Building projects across flight controllers, DC-DC converters, and MCU-based systems
-- 🎯 Looking for opportunities as an Embedded Hardware Design Engineer
+</div>
 
 ---
 
-## Tech Stack
+## About This Site
 
-**PCB Design**
+This is my personal portfolio, built and deployed with **GitHub Pages**. It walks through my background as an Embedded Hardware Design Engineer — schematic-to-silicon project work, tools, skills, and how to get in touch.
 
-`KiCad` `Altium Designer` `EasyEDA`
+🔗 **Live:** [raju-gudala.github.io](https://raju-gudala.github.io/)
 
-**Simulation**
+## What's Inside
 
-`LTspice` `PSpice` `NI Multisim`
+| Section | What it covers |
+|---|---|
+| **About** | Background, focus areas, and core toolset |
+| **Skills** | PCB design tools, firmware languages, microcontrollers, protocols |
+| **Experience** | R&D work at TiHAN-IIT Hyderabad — flight controllers, power modules |
+| **Projects** | Independent builds — buck converter, digital clock, IoT agri-bot |
+| **Education** | Academic background and certifications |
+| **PCB Design Journey** | How the skillset built up, project by project |
+| **Articles** | Write-ups on hardware design and debugging (in progress) |
+| **Contact** | Email, phone, GitHub, LinkedIn |
 
-**Firmware**
+## Built With
 
-`C` `Embedded C`
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white)
 
-**Microcontrollers**
+Single-page, no build step or framework — plain HTML/CSS/JS, deployed straight from this repo.
 
-`STM32 (F1/F4)` `ESP32` `Arduino` `8051` `PIC` `Raspberry Pi`
-
-**Dev Tools**
-
-`STM32CubeIDE` `Keil µVision` `Proteus` `Git`
-
-**Protocols**
-
-`UART` `SPI` `I2C` `CAN` `USB` `Wi-Fi`
-
----
-
-## Hardware Design Flow
+## Repo Contents
 
 ```
-Requirements
-     ↓
-Schematic Capture
-     ↓
-Component Selection
-     ↓
-PCB Layout
-     ↓
-DFM Review
-     ↓
-Fabrication (Gerbers)
-     ↓
-Assembly & Bring-Up
-     ↓
-Bench Testing & Validation
-     ↓
-Field Deployment
+├── index.html          # the portfolio site
+├── Raju_Gudala.pdf      # resume, linked from the site
+└── README.md            # this file
 ```
 
----
+## Running Locally
 
-## Featured Projects
+No build tools needed — just open the file:
 
-### UAV Flight Controller — Ti-Circle v1
+```bash
+git clone https://github.com/raju-gudala/raju-gudala.github.io.git
+cd raju-gudala.github.io
+open index.html   # or double-click it
+```
 
-6-layer PCB, 250+ components, built around the STM32F427 with ArduPilot firmware support, an STM32F103 I/O co-processor, and a dedicated multi-rail power supply for flight-critical peripherals.
+## Contact
 
-### Tethered Drone Power System
-
-End-to-end power delivery: 230V AC → 360V DC @ 8A (base station) → 24V DC @ 100A / 2.4kW (air unit), with real-time telemetry and automatic failover arbitration.
-
-### Adjustable DC-DC Buck Converter
-
-Wide-input (5–40V) buck converter using the LM2596S-ADJ with adjustable output (3.3–15V, 3A), UVLO, and EMI filtering — full schematic-to-PCB flow.
-
----
-
-## GitHub Stats
-
-![](https://github-readme-stats.vercel.app/api?username=raju-gudala&show_icons=true&theme=tokyonight&hide_border=true)
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=raju-gudala&layout=compact&theme=tokyonight&hide_border=true)
-
-![](https://github-readme-activity-graph.vercel.app/graph?username=raju-gudala&theme=github-dark)
+- **Email:** [rajugudala730@gmail.com](mailto:rajugudala730@gmail.com)
+- **GitHub:** [@raju-gudala](https://github.com/raju-gudala)
+- **LinkedIn:** [raju-gudala](https://www.linkedin.com/in/raju-gudala)
+- **Location:** Hyderabad, India
 
 ---
 
-## 2026 Goals
-
-- Broaden beyond UAV avionics into industrial and consumer embedded hardware
-- Strengthen power electronics and EMI/EMC design skills
-- Ship more open-source hardware projects with full documentation
-- Land a full-time role as an Embedded Hardware Design Engineer
-
----
-
-> *"Every trace has a reason. Every rail has a margin."*
-
-- Email: rajugudala730@gmail.com
-- GitHub: [@raju-gudala](https://github.com/raju-gudala)
-- LinkedIn: [raju-gudala](https://www.linkedin.com/in/raju-gudala)
-- 🔗 **Live site:** [raju-gudala.github.io](https://raju-gudala.github.io/)
+<div align="center">
+<sub>Designed & routed in Hyderabad · © 2026 Raju Gudala</sub>
+</div>

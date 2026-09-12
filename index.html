@@ -6276,28 +6276,73 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
         }, { threshold: 0.5 });
         statNumbers.forEach(num => counterObserver.observe(num));
 
-        // Contact Form — opens the visitor's email client; no backend is claimed.
+        // Contact Form — sends directly from the website using FormSubmit AJAX.
+        // No visitor email client or Chrome mail handler is opened.
         const contactForm = document.getElementById('contactForm');
         const formStatus = document.getElementById('formStatus');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const message = document.getElementById('message').value.trim();
+        const sendButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
-            if (!name || !email || !subject || !message) {
-                formStatus.className = 'form-status error';
-                formStatus.textContent = 'Please fill in all fields.';
-                return;
-            }
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-            const mailto = `mailto:rajugudala730@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailto;
-            formStatus.className = 'form-status success';
-            formStatus.textContent = 'Your email client should open with the message ready to send.';
-        });
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !email || !subject || !message) {
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = 'Please fill in all fields.';
+                    return;
+                }
+
+                const originalButtonText = sendButton ? sendButton.innerHTML : '';
+                if (sendButton) {
+                    sendButton.disabled = true;
+                    sendButton.innerHTML = 'Sending...';
+                }
+                formStatus.className = 'form-status';
+                formStatus.textContent = '';
+
+                try {
+                    const response = await fetch('https://formsubmit.co/ajax/rajugudala730@gmail.com', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            subject: subject,
+                            message: message,
+                            _replyto: email,
+                            _template: 'table'
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok || result.success === false) {
+                        throw new Error(result.message || 'Unable to send the message.');
+                    }
+
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Message sent successfully. Thank you for reaching out!';
+                    contactForm.reset();
+                } catch (error) {
+                    console.error('Contact form error:', error);
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = 'Unable to send the message right now. Please try again or email rajugudala730@gmail.com directly.';
+                } finally {
+                    if (sendButton) {
+                        sendButton.disabled = false;
+                        sendButton.innerHTML = originalButtonText;
+                    }
+                }
+            });
+        }
 
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -6332,7 +6377,7 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
         <div class="chatbot-header">
             <div class="chatbot-avatar">RG</div>
             <div class="chatbot-info">
-                <div class="chatbot-name">Portfolio Assistant</div>
+                <div class="chatbot-name">Senior</div>
                 <div class="chatbot-status"><span class="status-dot"></span> Local assistant</div>
             </div>
             <button class="chatbot-close" id="chatbotClose" aria-label="Close assistant">✕</button>
@@ -6352,9 +6397,9 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
             <button class="chatbot-send" id="chatbotSend" aria-label="Send message">➤</button>
         </div>
     </div>
-    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open portfolio assistant">
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open Senior">
         <span class="chatbot-toggle-icon">💬</span>
-        <span class="chatbot-toggle-text">Ask About Me</span>
+        <span class="chatbot-toggle-text">Ask Senior</span>
     </button>
 
     <script>
@@ -6370,7 +6415,7 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
         if (!toggle || !container || !close || !input || !send || !messages || !suggestions) return;
 
         const knowledge = [
-            { keywords: ['hello', 'hey', 'namaste', 'good morning', 'good evening'], response: "Hi! I'm Raju's portfolio assistant. Ask me about his projects, skills, education, certifications, or career interests." },
+            { keywords: ['hello', 'hey', 'namaste', 'good morning', 'good evening'], response: "Hi! I'm Raju's Senior. Ask me about his projects, skills, education, certifications, or career interests." },
             { keywords: ['tihan', 'internship', 'jraf', 'research assistant'], response: "Raju worked as a Research & Development Intern at TiHAN-IIT Hyderabad from May 2025 to Apr 2026, then joined as a Junior Research Assistant Fellow (JRAF) in May 2026. His work focuses on UAV flight controllers, power electronics, redundancy, and fault-tolerant hardware." },
             { keywords: ['tool', 'tools', 'kicad', 'altium', 'ltspice', 'pspice', 'easyeda'], response: "He works primarily in KiCad and Altium Designer for schematic capture and PCB layout, with EasyEDA, LTspice, and PSpice for simulation and power stage verification." },
             { keywords: ['skill', 'skills', 'technical skills', 'know'], response: "His skills include multilayer PCB layout, power electronics (buck converters, UVLO, EMI filtering), embedded firmware in C/Embedded C, and communication protocols like SPI, I2C, UART, and CAN." },

@@ -4768,7 +4768,7 @@ html.portfolio-ready .site-loader {display:none!important}
       linear-gradient(115deg, #031017 0%, #060b15 48%, #090916 100%) !important;
     isolation: isolate;
 }
-.hero-circuit-field { display: none !important; }
+.hero-circuit-field { display: block !important; }
 #circuit-canvas { transition: opacity .25s ease; }
 body.hero-active #circuit-canvas { opacity: 0 !important; }
 
@@ -5012,16 +5012,11 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
     overflow: hidden !important;
     padding: 7rem 3rem 4rem !important;
     background-color: var(--bg-primary) !important;
-    background-image: url('hero-background.png') !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-attachment: scroll !important;
   }
 
-  /* Let the artwork itself provide the chip; do not stack another chip image over it. */
-  .hero-chip-stage { display: none !important; }
-  .hero-circuit-field { display: none !important; }
+  /* Board photo + PCB trace field provide the embedded-hardware visual. */
+  .hero-chip-stage { display: flex !important; }
+  .hero-circuit-field { display: block !important; }
 
   .hero::before {
     content: '';
@@ -5134,17 +5129,13 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
 @media (min-width: 901px) {
     .hero {
         background-image:
-            linear-gradient(90deg, rgba(2, 7, 16, .18) 0%, rgba(2, 7, 16, .04) 58%, rgba(2, 7, 16, .10) 100%),
-            url("hero-background.png") !important;
-        background-repeat: no-repeat !important;
-        background-size: cover !important;
-        background-position: center center !important;
+            linear-gradient(90deg, rgba(2, 7, 16, .18) 0%, rgba(2, 7, 16, .04) 58%, rgba(2, 7, 16, .10) 100%) !important;
+        background-color: var(--bg-primary) !important;
     }
 
-    /* The chip is already part of the background artwork; don't render a
-       second foreground chip on desktop. */
+    /* Board photo stays visible alongside the circuit trace field. */
     .hero-chip-stage {
-        display: none !important;
+        display: flex !important;
     }
 
     /* Keep the copy above the artwork. */
@@ -5191,11 +5182,8 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
 @media (min-width: 901px) {
   .hero {
     background-image:
-      linear-gradient(90deg, rgba(2,7,16,.28) 0%, rgba(2,7,16,.08) 52%, rgba(2,7,16,.02) 100%),
-      url("hero-background.png") !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+      linear-gradient(90deg, rgba(2,7,16,.28) 0%, rgba(2,7,16,.08) 52%, rgba(2,7,16,.02) 100%) !important;
+    background-color: var(--bg-primary) !important;
   }
 }
 @media (max-width: 900px) {
@@ -5276,6 +5264,16 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
     </nav>
 
     <section class="hero" id="home">
+        <div class="hero-circuit-field" aria-hidden="true">
+            <span class="trace trace-a"></span>
+            <span class="trace trace-b"></span>
+            <span class="trace trace-c"></span>
+            <span class="trace trace-d"></span>
+            <span class="trace trace-e"></span>
+            <span class="trace trace-f"></span>
+            <span class="trace trace-g"></span>
+            <span class="trace trace-h"></span>
+        </div>
         <div class="hero-home-grid">
             <div class="hero-content">
                 <div class="hero-badge">

@@ -4316,6 +4316,30 @@ html.portfolio-ready .site-loader {display:none!important}
 }
 </style>
 
+<style id="experience-entry-consistency">
+#experience .timeline-content {
+    text-align: left !important;
+}
+
+#experience .timeline-list {
+    margin-top: 0.5rem !important;
+}
+
+#experience .timeline-list li {
+    color: var(--text-muted) !important;
+    font-size: 0.82rem !important;
+    line-height: 1.7 !important;
+    padding-left: 1rem !important;
+    position: relative !important;
+}
+
+#experience .timeline-list li::before {
+    content: '▸' !important;
+    position: absolute !important;
+    left: 0 !important;
+    color: var(--accent-cyan) !important;
+}
+</style>
 
 <style id="experience-timeline-left-content-right">
 @media (min-width: 1025px) {
@@ -5842,7 +5866,7 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
             </div>
 
             <div class="timeline">
-                <!-- Research & Development Intern -->
+                <!-- Research & Development Intern | May 2025 – Apr 2026 -->
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -5858,16 +5882,19 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
                     </div>
                 </div>
 
-                <!-- Junior Research Assistant Fellow -->
+                <!-- Junior Research Assistant Fellow (JRAF) | May 2026 – Present -->
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">May 2026 – Present</div>
                         <h3 class="timeline-title">Junior Research Assistant Fellow (JRAF)</h3>
                         <div class="timeline-company">TiHAN-IIT Hyderabad, Telangana</div>
-                        <p class="timeline-description">
-                            Designing a redundant-feature flight controller architecture, building fault tolerance into the hardware layer so flight-critical functions remain operational under single-point subsystem failures. Developing power modules for drone platforms, focused on wide-input voltage support, high efficiency, and low-EMI layout to ensure stable, clean power delivery to flight-critical avionics. Working across the full hardware development lifecycle — schematic capture, multilayer PCB layout, DFM review, and bench validation, for reliability-driven UAV systems.
-                        </p>
+                        <ul class="timeline-list">
+                            <li>Developing a redundant-feature UAV flight controller architecture with hardware-level fault tolerance, designed to maintain flight-critical functions during single-point subsystem failures</li>
+                            <li>Designing UAV power modules with wide-input voltage capability, high conversion efficiency, and low-EMI power-stage/layout practices for stable and clean delivery to flight-critical avionics</li>
+                            <li>Driving hardware development from schematic capture and component-level design through multilayer PCB layout, DFM review, prototype bring-up, and bench validation</li>
+                            <li>Applying reliability-focused hardware design practices across flight-control and power subsystems to improve system robustness and operational continuity in UAV platforms</li>
+                        </ul>
                     </div>
                 </div>
             </div>

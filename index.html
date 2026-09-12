@@ -1536,7 +1536,7 @@ html.portfolio-ready .site-loader {display:none!important}
 .ic-loader__status {margin-top:2px;color:#67e8f9;font:500 13px ui-monospace,SFMono-Regular,monospace;letter-spacing:.08em}
 .ic-loader__status i {display:inline-block;width:7px;height:15px;margin-left:7px;vertical-align:-3px;background:#22d3ee;animation:blink .8s steps(1) infinite}
 .ic-loader__progress {width:min(430px,58vw);height:3px;margin-top:13px;border-radius:10px;overflow:hidden;background:#182235}
-.ic-loader__progress span {display:block;width:100%;height:100%;transform:translateX(-100%);background:linear-gradient(90deg,#22d3ee,#8b5cf6);animation:progress 2.8s cubic-bezier(.65,0,.35,1) forwards}
+.ic-loader__progress span {display:block;width:100%;height:100%;transform:translateX(-100%);background:linear-gradient(90deg,#22d3ee,#8b5cf6);animation:progress 1.8s cubic-bezier(.65,0,.35,1) forwards}
 .ic-loader__stages {display:flex;justify-content:space-between;width:min(520px,70vw);margin-top:12px;color:#52627a;font:600 9px ui-monospace,monospace;letter-spacing:.12em}
 .ic-loader__stages .active {color:#67e8f9}
 @keyframes route-draw {to{stroke-dashoffset:0}}
@@ -6313,7 +6313,7 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
   });
 
   // ---- reveal the portfolio ----
-  var TOTAL = 3000;
+  var TOTAL = 2000;
   function reveal(){
     loader.classList.add('is-hidden');
     document.documentElement.classList.add('portfolio-ready');

@@ -210,6 +210,7 @@
         .timeline-list { list-style: none; margin-top: 0.5rem; }
         .timeline-list li { color: var(--text-muted); font-size: 0.82rem; line-height: 1.7; padding-left: 1rem; position: relative; }
         .timeline-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-cyan); }
+        .timeline-description { color: var(--text-secondary); font-size: 0.84rem; line-height: 1.7; margin-top: 0.75rem; }
 
         /* ===== EDUCATION ===== */
         .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
@@ -5836,15 +5837,17 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-label">05. // Experience</span>
-                <h2 class="section-title">TiHAN-IIT <span class="gradient-text">Hyderabad</span></h2>
-                <p class="section-subtitle">Hands-on hardware R&D across UAV avionics and power electronics.</p>
+                <h2 class="section-title">Professional <span class="gradient-text">Experience</span></h2>
+                <p class="section-subtitle">Hands-on hardware R&amp;D across UAV avionics, power electronics, and fault-tolerant flight systems.</p>
             </div>
+
             <div class="timeline">
+                <!-- Research & Development Intern -->
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">May 2025 – Apr 2026</div>
-                        <h3 class="timeline-title">Junior Research Assistant Fellow (JRAF)</h3>
+                        <h3 class="timeline-title">Research &amp; Development Intern</h3>
                         <div class="timeline-company">TiHAN-IIT Hyderabad, Telangana</div>
                         <ul class="timeline-list">
                             <li>Designed a custom UAV flight controller on a 6-layer PCB with 250+ components, supporting ArduPilot firmware around the STM32F427</li>
@@ -5852,6 +5855,19 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
                             <li>Built a custom carrier board for the Cube Orange+ flight controller with EMI/EMC-aware layout — flight-tested on a drone platform</li>
                             <li>Engineered a 2.4kW tethered drone power system (230V AC → 360V DC → 24V DC @ 100A) with real-time telemetry and automatic failover</li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- Junior Research Assistant Fellow -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">May 2026 – Present</div>
+                        <h3 class="timeline-title">Junior Research Assistant Fellow (JRAF)</h3>
+                        <div class="timeline-company">TiHAN-IIT Hyderabad, Telangana</div>
+                        <p class="timeline-description">
+                            Designing a redundant-feature flight controller architecture, building fault tolerance into the hardware layer so flight-critical functions remain operational under single-point subsystem failures. Developing power modules for drone platforms, focused on wide-input voltage support, high efficiency, and low-EMI layout to ensure stable, clean power delivery to flight-critical avionics. Working across the full hardware development lifecycle — schematic capture, multilayer PCB layout, DFM review, and bench validation, for reliability-driven UAV systems.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -6279,10 +6295,10 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
 
         const knowledge = [
             { keywords: ['hello', 'hey', 'namaste', 'good morning', 'good evening'], response: "Hi! I'm Raju's portfolio assistant. Ask me about his projects, skills, education, certifications, or career interests." },
-            { keywords: ['tihan', 'internship', 'jraf', 'research assistant'], response: "Raju is working as a Junior Research Assistant Fellow (JRAF) at TiHAN-IIT Hyderabad (May 2025 – Apr 2026), designing UAV flight controllers and power electronics systems." },
+            { keywords: ['tihan', 'internship', 'jraf', 'research assistant'], response: "Raju worked as a Research & Development Intern at TiHAN-IIT Hyderabad from May 2025 to Apr 2026, then joined as a Junior Research Assistant Fellow (JRAF) in May 2026. His work focuses on UAV flight controllers, power electronics, redundancy, and fault-tolerant hardware." },
             { keywords: ['tool', 'tools', 'kicad', 'altium', 'ltspice', 'pspice', 'easyeda'], response: "He works primarily in KiCad and Altium Designer for schematic capture and PCB layout, with EasyEDA, LTspice, and PSpice for simulation and power stage verification." },
             { keywords: ['skill', 'skills', 'technical skills', 'know'], response: "His skills include multilayer PCB layout, power electronics (buck converters, UVLO, EMI filtering), embedded firmware in C/Embedded C, and communication protocols like SPI, I2C, UART, and CAN." },
-            { keywords: ['experience', 'background', 'work experience', 'profile'], response: "Raju has 1.5+ years of hardware R&D experience at TiHAN-IIT Hyderabad, working on UAV flight controllers, power modules, and tethered drone power systems." },
+            { keywords: ['experience', 'background', 'work experience', 'profile'], response: "Raju has hardware R&D experience at TiHAN-IIT Hyderabad, progressing from Research & Development Intern to Junior Research Assistant Fellow (JRAF), working on UAV flight controllers, power modules, tethered drone power systems, and fault-tolerant avionics." },
             { keywords: ['flight controller', 'uav', 'drone', 'avionics'], response: "His flagship project is a custom UAV flight controller (Ti-Circle v1) built on a 6-layer PCB with 250+ components, supporting ArduPilot firmware around the STM32F427." },
             { keywords: ['education', 'degree', 'btech', 'puc', 'college', 'university'], response: "He holds a B.Tech in Electronics & Communication Engineering from RGUKT Nuzvid (CGPA 8.05/10), plus a Pre-University Course also completed at RGUKT Nuzvid." },
             { keywords: ['hire', 'hiring', 'available', 'role', 'roles', 'internship', 'intern', 'opportunity'], response: "He's open to full-time Embedded Hardware Design Engineer roles, as well as freelance PCB and embedded design projects." },

@@ -5400,6 +5400,49 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
 }
 </style>
 
+
+
+<style id="absolute-final-hero-fix">
+/* =========================================================
+   ABSOLUTE FINAL HERO FIX
+   background.png is the ONLY artwork used in the Home section.
+   ========================================================= */
+.hero {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(2, 7, 15, 0.88) 0%,
+            rgba(2, 7, 15, 0.72) 34%,
+            rgba(2, 7, 15, 0.34) 62%,
+            rgba(2, 7, 15, 0.10) 100%
+        ),
+        url("./background.png") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+}
+
+.hero-chip-stage,
+.hero-circuit-field {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        background-image:
+            linear-gradient(
+                90deg,
+                rgba(2, 7, 15, 0.82) 0%,
+                rgba(2, 7, 15, 0.68) 100%
+            ),
+            url("./background.png") !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+}
+</style>
+
 </head>
 <body>
 
@@ -5490,10 +5533,6 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
                     <a href="Raju_Gudala.pdf" class="btn btn-resume" download>⇩&nbsp; Download Resume</a>
                 </div>
                 <div class="hero-scroll-hint" aria-hidden="false">↓&nbsp; Scroll to explore</div>
-            </div>
-
-            <div class="hero-chip-stage" aria-label="Embedded hardware PCB image">
-                <img class="hero-chip-image" src="hero-board.png" alt="Custom PCB with microcontroller and connectors" loading="eager" decoding="async">
             </div>
         </div>
     </section>
@@ -6510,7 +6549,7 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
     document.body.classList.add('portfolio-ready');
   }
   window.addEventListener('load', function(){ setTimeout(reveal, TOTAL); }, {once:true});
-  setTimeout(reveal, TOTAL+500);
+  setTimeout(reveal, TOTAL);
 })();
 </script>
 

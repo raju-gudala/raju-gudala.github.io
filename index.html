@@ -5208,6 +5208,198 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
 }
 </style>
 
+
+<style id="final-hero-background-and-loader-speed">
+/* =========================================================
+   FINAL HERO BACKGROUND
+   Uses the repository root asset: ./background.png
+   The supplied artwork becomes the complete Home-section
+   background, so the separate hero-board image is hidden.
+   ========================================================= */
+.hero {
+    position: relative !important;
+    min-height: 100svh !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    isolation: isolate !important;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(2, 7, 15, 0.94) 0%,
+            rgba(2, 7, 15, 0.86) 25%,
+            rgba(2, 7, 15, 0.58) 48%,
+            rgba(2, 7, 15, 0.18) 75%,
+            rgba(2, 7, 15, 0.12) 100%
+        ),
+        url('./background.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+}
+
+.hero::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 5, 12, 0.55) 0%,
+            rgba(0, 5, 12, 0.22) 50%,
+            rgba(0, 5, 12, 0.05) 100%
+        ) !important;
+    z-index: 0 !important;
+}
+
+.hero-home-grid {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(1400px, 100%) !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.hero-content {
+    position: relative !important;
+    z-index: 4 !important;
+    width: min(760px, 100%) !important;
+    max-width: 760px !important;
+    text-align: left !important;
+    margin: 0 !important;
+}
+
+/* The supplied background.png already contains the PCB artwork. */
+.hero-chip-stage,
+.hero-circuit-field {
+    display: none !important;
+}
+
+.hero h1 {
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.hero-description {
+    color: #aeb7c7 !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65) !important;
+}
+
+/* =========================================================
+   FINAL LOADER TIMING — 1.5 SECONDS
+   All one-shot loader drawing/reveal animations are forced
+   to complete within 1.5 s and old staggered delays are removed.
+   ========================================================= */
+.site-loader .trace {
+    animation: pd-route-draw 1.5s cubic-bezier(.65,0,.35,1) 0s 1 forwards !important;
+}
+
+.site-loader .ic-pins {
+    animation: pd-pins 1.5s ease 0s 1 forwards !important;
+}
+
+.site-loader .ic-die,
+.site-loader .die-cells {
+    animation: pd-die 1.5s cubic-bezier(.65,0,.35,1) 0s 1 both !important;
+}
+
+.site-loader .trace-base {
+    animation: pd-route-settle 1.5s ease 0s 1 forwards !important;
+}
+
+.site-loader .trace-signal .signal {
+    animation: pd-signal-travel 1.5s linear 0s 1 both !important;
+}
+
+.site-loader .ic-pulses .pulse,
+.site-loader .pulse {
+    animation: pd-endpoint-pulse 1.5s linear 0s 1 both !important;
+}
+
+.site-loader__progress span {
+    animation: pd-progress 1.5s linear 0s 1 forwards !important;
+}
+
+.site-loader__bar::after {
+    animation: loader-progress 1.5s linear 0s 1 forwards !important;
+}
+
+/* Remove all old staggered loader delays. */
+.site-loader .t1, .site-loader .t2, .site-loader .t3,
+.site-loader .t4, .site-loader .t5, .site-loader .t6,
+.site-loader .t7, .site-loader .t8, .site-loader .t9,
+.site-loader .t10, .site-loader .t11, .site-loader .t12,
+.site-loader .s1, .site-loader .s2, .site-loader .s3,
+.site-loader .s4, .site-loader .s5, .site-loader .s6,
+.site-loader .s7, .site-loader .s8, .site-loader .s9,
+.site-loader .s10, .site-loader .s11, .site-loader .s12,
+.site-loader .s13, .site-loader .s14, .site-loader .s15,
+.site-loader .s16, .site-loader .s17, .site-loader .s18,
+.site-loader .s19, .site-loader .s20, .site-loader .s21,
+.site-loader .s22, .site-loader .s23, .site-loader .s24,
+.site-loader .s25, .site-loader .s26,
+.site-loader .p1, .site-loader .p2, .site-loader .p3,
+.site-loader .p4, .site-loader .p5, .site-loader .p6,
+.site-loader .p7, .site-loader .p8, .site-loader .p9,
+.site-loader .p10, .site-loader .p11, .site-loader .p12,
+.site-loader .p13, .site-loader .p14, .site-loader .p15,
+.site-loader .p16, .site-loader .p17, .site-loader .p18,
+.site-loader .p19, .site-loader .p20, .site-loader .p21,
+.site-loader .p22, .site-loader .p23, .site-loader .p24,
+.site-loader .p25, .site-loader .p26 {
+    animation-delay: 0s !important;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        min-height: calc(100svh - 70px) !important;
+        height: auto !important;
+        padding: 6.25rem 1.1rem 4.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-image:
+            linear-gradient(
+                90deg,
+                rgba(2, 7, 15, 0.92) 0%,
+                rgba(2, 7, 15, 0.78) 100%
+            ),
+            url('./background.png') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+    .hero-home-grid {
+        width: 100% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        display: flex !important;
+    }
+
+    .hero-content {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    .hero-chip-stage,
+    .hero-circuit-field {
+        display: none !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+</style>
+
 </head>
 <body>
 
@@ -6311,14 +6503,14 @@ body.hero-active #circuit-canvas { opacity: 0 !important; }
   });
 
   // ---- reveal the portfolio ----
-  var TOTAL = 2000;
+  var TOTAL = 1500;
   function reveal(){
     loader.classList.add('is-hidden');
     document.documentElement.classList.add('portfolio-ready');
     document.body.classList.add('portfolio-ready');
   }
   window.addEventListener('load', function(){ setTimeout(reveal, TOTAL); }, {once:true});
-  setTimeout(reveal, TOTAL+800);
+  setTimeout(reveal, TOTAL+500);
 })();
 </script>
 
